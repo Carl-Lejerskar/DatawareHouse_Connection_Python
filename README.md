@@ -23,6 +23,8 @@ pip install cx_Oracle
 pip install pandas
 ```
 
+**Important**
+
 If missing Oracle Instant Client, follow this guide (Make sure to use the steps specified for your operating system):
 
 https://oracle.github.io/odpi/doc/installation.html#macos
