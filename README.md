@@ -4,48 +4,55 @@ This is a simple walkthrough to get connected to an Oracle Datawarehouse using P
 ## Getting Started
 Before starting this quick guide, you should have already provisioned an Oracle Autonomous Data Warehouse and have access to the details specified during provisioning.
 
-### Prerequisites
+## Prerequisites
 
 * Access to a provisioned Oracle Data Warehouse
 
 * Python 3.5+
 
-* cx_Oracle module
+* cx_Oracle package
 
-* pandas module
+* pandas package
 
-Install cx_Oracle and pandas using pip:
+* Oracle Instant Client 
+
+If missing packages, install cx_Oracle and pandas using pip:
 
 ```
 pip install cx_Oracle
 pip install pandas
 ```
 
-### Download Wallet File 
+If missing Oracle Instant Client, follow this guide (Make sure to use the steps specified for your operating system):
+
+https://oracle.github.io/odpi/doc/installation.html#macos
+
+
+## Download Wallet File 
 
 Log in to your OCI Account and access the Autonomous Datawarehouse Page. Click the name of the Datawarehouse:
 
-![image](ADW1.png)
+![image](media/ADW1.png)
 
 Click on the service console button.
 
-![image](ADW2.png)
+![image](media/ADW2.png)
 
 Thereafter click on the Administration tab on the left-hand side.
 
-![image](ADW3.png)
+![image](media/ADW3.png)
 
 Then click on the Download Client Credentials (Wallet) and enter the password created when provisioning the ADW instance, and click the Download button. Extract this zip file and note its location as it will be used later on. 
 
-![image](ADW4.png)
+![image](media/ADW4.png)
 
-### Editing sqlnet.ora
+## Editing sqlnet.ora
 
 Within the wallet file there is a file called sqlnet.ora. Open this file with your favorite text editor and replace the path "?/network/admin" set for DIRECTORY with the path of the extracted wallet you found noted earlier, something like "/Users/johndoe/Downloads/Wallet_DBNAME". The path is shown below:
 
-![image](ADW5.png)
+![image](media/ADW5.png)
 
-### Choosing a Connection.
+## Choosing a Connection.
 
 Within the Wallet File open tsnames.ora, and select the connection for your needs:
 
@@ -57,11 +64,11 @@ Within the Wallet File open tsnames.ora, and select the connection for your need
 
 For this example I selected first connection name.
 
-![image](ADW6.png)
+![image](media/ADW6.png)
 
 You will need this name for the next step. 
 
-### Making the Connection with cx_Oracle in Python
+## Making the Connection with cx_Oracle in Python
 
 Here you need the the path of the unzipped wallet used previously, a username (ADMIN by default), and the password set while provisiong your Datawarehouse.
 
@@ -78,7 +85,7 @@ hrdata = pd.DataFrame(cursor.fetchall())
 print(hrdata)
 ```
 
-![image](ADW7.png)
+![image](media/ADW7.png)
 
 Within the cursor.execute() statement you can type any SQL statements you need, accessing the results with cursor.fetchall() enabling you to interact directly with the Data Warehouse within a python script. For further details, check out cx_Oracle's documentation here: https://cx-oracle.readthedocs.io/en/latest/.
 
